@@ -1,0 +1,26 @@
+{
+  "name": "musical-timer",
+  "version": "1.0.0",
+  "description": "A Musical clock to handle beat events",
+  "main": "./src/node-main.js",
+  "directories": {
+    "test": "test"
+  },
+  "dependencies": {
+    "advanced-timer": "^2.0.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "github.com/colxi/..."
+  },
+  "keywords": [
+    "musical",
+    "timer"
+  ],
+  "author": "colxi",
+  "license": "MIT"
+}

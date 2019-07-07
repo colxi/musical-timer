@@ -1,0 +1,143 @@
+<html>
+    <head></head>
+    <body>
+        <div id="play">Play</div>
+        <div id="pause">Pause</div>
+        <div id="stop">Stop</div>
+        <p></p>
+        <div>TEMPO :<input type="number" value="60" id="tempo"><span id="set_tempo"> SET</span> </div>
+        <div>SIGNATURE :<input type="text" value="4/4" id="signature"><span id="set_signature"> SET</span> </div>
+        <div>BEAT RESOLUTION FACTOR :<input type="number" value="2"  id="resolution_factor"><span id="set_resolution_factor"> SET</span> </div>
+        <p></p>
+        <div>STATUS : <span id="status"></span> </div>
+        <div>Ellapsed Time : <span id="ellapsed"></span></div>
+        <div>Beat Subdivisions : <span id="beatSubdivision"></span></div>
+        <div>In Sync : <span id="sync"></span></div>
+        <p></p>
+        <div>Current Tick : <span id="tick"></span></div>
+        <div>Current Bar : <span id="bar"></span></div>
+        <div>Current Beat : <span id="beat"></span></div>
+        <div>Current SubBeat : <span id="subbeat"></span></div>
+
+        <script type="module">
+            import {MusicalTimer} from '../src/musical-timer.js';
+            
+            
+            // Generate 3 tones
+            let ctx = new AudioContext();
+            let osc = [ 
+                new OscillatorNode(ctx, { frequency : 761 } ),
+                new OscillatorNode(ctx, { frequency : 829 } ),
+                new OscillatorNode(ctx, { frequency : 952 } )
+            ];
+            osc[0].start();
+            osc[1].start();
+            osc[2].start();
+
+            // beep() : plays the requested tone 
+            function beep(id, duration=160) {
+                osc[id].connect(ctx.destination);
+                setTimeout( ()=>{ 
+                    try{ osc[id].disconnect(ctx.destination) }
+                    catch(e){}
+                }, duration);
+            };
+
+            // track last played bar and beat
+            let lastBar = 0;
+            let lastBeat = 0;
+
+            // create new musical timer, and provide callback function
+            let myMusicalTimer = MusicalTimer( function( t ){
+                console.log(this)
+                // browsers require a window user itneraction in order
+                // to enable the audio context... verify its been activated
+                // or request activation
+                if (ctx.state !== 'running')  ctx.resume();
+
+                // if new bar , beep
+                if(lastBar !== myMusicalTimer.bar){
+                    lastBar = myMusicalTimer.bar;
+                    beep(2); 
+                }
+                
+                // if new beat ... beep
+                if(lastBeat !== myMusicalTimer.beat){
+                    lastBeat = myMusicalTimer.beat;
+                    beep(1); // E4
+                }
+                
+                // subbeat...beep
+                beep(0); // C4
+                
+                // output some info
+                console.log(
+                    'tick :' , myMusicalTimer.tick,
+                    '- bar-beat-subeat : ' + myMusicalTimer.bar + ' ' + myMusicalTimer.beat + ' ' +myMusicalTimer.subBeat, 
+                    '- delta : ' + myMusicalTimer.tickInterval + ' ('+ (myMusicalTimer.tickDeltatime-myMusicalTimer.tickInterval) +')' 
+                ); 
+            });
+
+            console.log( myMusicalTimer );
+
+
+
+            let DOM = {
+                play  : document.getElementById('play'),
+                pause : document.getElementById('pause'),
+                stop : document.getElementById('stop'),
+                tempo : document.getElementById('tempo'),
+                signature : document.getElementById('signature'),
+                resolutionFactor : document.getElementById('resolution_factor'),
+                setTempo : document.getElementById('set_tempo'),
+                setSignature : document.getElementById('set_signature'),
+                setResolutionFactor : document.getElementById('set_resolution_factor'),
+                status : document.getElementById('status'),
+                ellapsed : document.getElementById('ellapsed'),
+                tick : document.getElementById('tick'),
+                beatSubdivision : document.getElementById('beatSubdivision'),
+                bar : document.getElementById('bar'),
+                beat : document.getElementById('beat'),
+                subBeat : document.getElementById('subbeat'),
+                sync : document.getElementById('sync')
+            }
+            // add event listeners to the UI elements
+            DOM.play.addEventListener('click',myMusicalTimer.play,false)
+
+            DOM.pause.addEventListener('click',myMusicalTimer.pause,false)
+
+            DOM.stop.addEventListener('click',()=>{
+                myMusicalTimer.stop();
+                lastBar = 0;
+                lastBeat = 0;
+            },false)
+
+            DOM.setTempo.addEventListener('click',()=>{
+                myMusicalTimer.tempo = DOM.tempo.value;
+            },false)
+
+            DOM.setSignature.addEventListener('click',()=>{
+                myMusicalTimer.signature = DOM.signature.value;
+            },false)
+
+            DOM.setResolutionFactor.addEventListener('click',()=>{
+                myMusicalTimer.resolutionFactor = DOM.resolutionFactor.value;
+            },false)
+
+            // non blocking GUI update
+            function UI(){
+                DOM.status.innerText= myMusicalTimer.status;
+                DOM.ellapsed.innerText= myMusicalTimer.timestampFormated;
+                DOM.tick.innerText= myMusicalTimer.tick;
+                DOM.beatSubdivision.innerText= myMusicalTimer.beatSubdivision;
+                DOM.bar.innerText= myMusicalTimer.bar;
+                DOM.beat.innerText= myMusicalTimer.beat;
+                DOM.subBeat.innerText= myMusicalTimer.subBeat;
+                DOM.sync.innerText= myMusicalTimer.inSync;
+                requestAnimationFrame(UI);
+            }
+            UI();
+
+        </script>
+    </body>
+</html>

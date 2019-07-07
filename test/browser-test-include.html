@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script src="../src/main.js" type="module"></script>
+        <script> 
+            // Listen to the DOMContentLoaded event to ensure the script is available
+            document.addEventListener('DOMContentLoaded', function() {
+                if( !MusicalTimer ){
+                    document.write( 'Error loading MusicalTimer!' );
+                    console.log( 'Error loading MusicalTimer!' );
+                }else{
+                    document.write( 'MusicalTime Included!' ) ;
+                    console.log( 'MusicalTime Included!'  );
+                    let myTimer = new MusicalTimer( ()=>console.log('tick : ' + myTimer.tick ) );
+                    myTimer.play();
+                }
+            });
+         </script>
+    </head>
+    <body>
+        
+    </body>
+</html>
