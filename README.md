@@ -9,7 +9,7 @@ Main Features :
 - Adjustable Tempo (up to 200 bpm)
 - Supported time signatures : 2/4 | 3/4 | 4/4 | 6/8 | 9/8 | 12/8
 - Supported time subdivision Modes : Binary / Ternary 
-- Beat subdivision resolution up to sixty-fourth note (hemidemisemiquave, 1/16th of a beat)
+- Beat subdivision resolution up to 𝅘𝅥𝅱 ( sixty-fourth note, hemidemisemiquave, 1/16th of a beat)
 - Tracks clock Sync 
 - Controls : Play / Pause / Resume / Stop (Reset)
 - Highly Performant
@@ -26,7 +26,7 @@ let myTimer = new MusicalTimer( myTickHandler );
 myTimer.tempo = 120;
 myTimer.signature = '2/4';
 myTimer.play();
-// -> myTickHandler will be executed every 500ms (120bpm) 
+// -> myTickHandler will be executed every 500ms (120bpm)
 ```
 
 Demo: [See it in action](https://colxi.github.io/musical-timer/test/browser-test-import.html)
@@ -64,7 +64,7 @@ $ npm install musical-timer -s
 
 - **CDN**: Include the script in your HTML header (`window.MusicalTimer` will be created).
  ```html
-<script src="https://colxi.info/musical-timer/src/main.js"></script>
+<script src="https://colxi.info/musical-timer/src/main.js" type="module"></script>
 ```
 
 #  Properties & Methods
@@ -95,120 +95,118 @@ myTimer.play();
 myTimer.stop(); // timer stops and gets reseted
 ```
 
-> _musicalTimerInstance_.**bar**  ![](https://colxi.info/musical-timer/docs/lock.png)
+> _musicalTimerInstance_.**bar**  ![Read only](https://colxi.info/musical-timer/docs/lock.png)
 
-Returns an integer representing the current musical **bar**
+Read only. Returns an integer representing the current musical **bar**
 
-> _musicalTimerInstance_.**beat**  ![read only](https://colxi.info/musical-timer/docs/lock.png)
+> _musicalTimerInstance_.**beat**  ![Read only](https://colxi.info/musical-timer/docs/lock.png)
 
-Returns an integer representing the current **bar beat**
+Read only. Returns an integer representing the current **beat** in the bar.
 
+> _musicalTimerInstance_.**beatSubdivision**  ![Read only](https://colxi.info/musical-timer/docs/lock.png)
 
-> _musicalTimerInstance_.**beatSubdivision**  ![](https://colxi.info/musical-timer/docs/lock.png)
+Read only. Returns an integer representing the **ammount of elements** a beat can contain considering the resolution factor.
 
-> _musicalTimerInstance_.**beatsPerBar**  ![](https://colxi.info/musical-timer/docs/lock.png)
+> _musicalTimerInstance_.**beatsPerBar**  ![Read only](https://colxi.info/musical-timer/docs/lock.png)
 
-> _musicalTimerInstance_.**inSync**  ![](https://colxi.info/musical-timer/docs/lock.png)
+Read only. Returns an integer representing the **ammount of beats** each bar contain, according to the time signature.
+
+> _musicalTimerInstance_.**inSync**  ![Read only](https://colxi.info/musical-timer/docs/lock.png)
+
+Read only. Returns an boolean representing the **clock sync status**. If the provided callback function is not performant, clock could run out of sync.
 
 > _musicalTimerInstance_.**resolutionFactor** 
 
+Accepts an integer (range 0-4) to set the beat subdivision resolution ( Default=0 ). Resolution levels are :
+- 𝅘𝅥 0 : Each beat has 0 sub-beats - quarter note (crotchet) - 
+- 𝅘𝅥𝅮 1 : Each beat has 2 sub-beats - eighth note (quaver) -
+- 𝅘𝅥𝅯 2 : Each beat has 4 sub-beats - sixteenth note (semiquaver) -
+- 𝅘𝅥𝅰 3 : Each beat has 8 sub-beats - thirty-second note (demisemiquaver)
+- 𝅘𝅥𝅱 4 : Each beat has 8 sub-beats - sixty-fourth note	(hemidemisemiquaver) -
+
+Depending on the resolution level, each timer tick, will represent _a crotchet, a quaver, a semiquaver_...
+
 > _musicalTimerInstance_.**signature** 
 
-> _musicalTimerInstance_.**status**  ![](https://colxi.info/musical-timer/docs/lock.png)
+Accepts a string representing the time signature ( Default='4/4' ). Accepted time signatures are :
+- 2/4 (binary - 𝅘𝅥 𝅘𝅥 )
+- 3/4 (binary - 𝅘𝅥 𝅘𝅥 𝅘𝅥 )
+- 4/4 (binary - 𝅘𝅥 𝅘𝅥 𝅘𝅥 𝅘𝅥 )
+- 6/8 (ternary - 𝅘𝅥 𝅘𝅥 )
+- 9/8 (ternary - 𝅘𝅥 𝅘𝅥 𝅘𝅥 ) 
+- 12/8 (ternary - 𝅘𝅥 𝅘𝅥 𝅘𝅥 𝅘𝅥 )
 
-> _musicalTimerInstance_.**statusCode**  ![](https://colxi.info/musical-timer/docs/lock.png)
+> _musicalTimerInstance_.**status**  ![Read only](https://colxi.info/musical-timer/docs/lock.png)
 
-> _musicalTimerInstance_.**subBeat**  ![](https://colxi.info/musical-timer/docs/lock.png)
+Read only. String representing the status of the timer : _'stopped' , 'running' , 'paused'_
+
+> _musicalTimerInstance_.**statusCode**  ![Read only](https://colxi.info/musical-timer/docs/lock.png)
+
+Read only. Integer representations of the status of the timer : _0, 1, 2_
+
+> _musicalTimerInstance_.**subBeat**  ![Read only](https://colxi.info/musical-timer/docs/lock.png)
+
+Read only. Returns an integer representing the current **subbeat** in the beat.
 
 > _musicalTimerInstance_.**tempo** 
 
-> _musicalTimerInstance_.**tick**  ![](https://colxi.info/musical-timer/docs/lock.png)
+Accepts a positive number ( range 1-200 ) representing the beats per minute (bpm) clock frequency. ( Default=60 )
 
-> _musicalTimerInstance_.**tickDeltatime**  ![](https://colxi.info/musical-timer/docs/lock.png)
+> _musicalTimerInstance_.**tick**  ![Read only](https://colxi.info/musical-timer/docs/lock.png)
 
-> _musicalTimerInstance_.**tickInterval**  ![](https://colxi.info/musical-timer/docs/lock.png)
+Read only. Integer representing the clock's current tick.
 
-> _musicalTimerInstance_.**timestamp**  ![](https://colxi.info/musical-timer/docs/lock.png)
+> _musicalTimerInstance_.**tickDeltatime**  ![Read only](https://colxi.info/musical-timer/docs/lock.png)
 
-> _musicalTimerInstance_.**timestampFormated**  ![](https://colxi.info/musical-timer/docs/lock.png)
+Read only. Integer representing the time in miliseconds since the last clock tick.
 
-Holds the timer current tempo value (bpm). Only accepts positive numbers. Limited to 200bpm by default
+> _musicalTimerInstance_.**tickInterval**  ![Read only](https://colxi.info/musical-timer/docs/lock.png)
 
-> _musicalTimerInstance_.**signature** 
+Read only. Integer representing the theoretical time in miliseconds betwen ticks (considering the beat resolution and tempo).
+
+> _musicalTimerInstance_.**timestamp**  ![Read only](https://colxi.info/musical-timer/docs/lock.png)
+
+Read only. Integer representing the time passed since timer was started, in miliseconds
+
+> _musicalTimerInstance_.**timestampFormated**  ![Read only](https://colxi.info/musical-timer/docs/lock.png)
+
+Read only. String representing the time passed since timer was started, in the format hh:mm:ss:SS
 
 
 
 
-# Usage
-The `Constructor` returns a `Proxy Object` and any regular Object operation can be performed on it (except property deletion). In the following list, you will find examples of the the most common operations and interactions: 
 
-**Import and Construct**:
+# Usage example
+In the following example the `Constructor` is called to create a musical timer, handled by a function that outputs the timer state in each tick.
+:
 ```javascript
-import {CSSGlobalVariables} from './css-global-variables.js';
-let cssVar = new CSSGlobalVariables();
+import {MusicalTimer} from './path-to/musical-timer.js';
+
+// Create a new timer and asign a tick handler
+let myTimer = new MusicalTimer( function(){
+    console.log( `${this.timestampFormated} : SubBeat ${this.subBeat} of Beat ${this.beat} of bar ${this.bar}` );
+});
+
+// configure timer to run at 120bpm
+myTimer.tempo = 120;
+// with a 2/4 signature ( 2 beats per bar in binary mode )
+myTimer.signature = '2/4';
+// and a beat subdivision of 2 sub-beats ( 𝅘𝅥𝅮, eighth note, quaver )
+myTimer.resolutionFactor = 1;
+// start timer!
+myTimer.play();
 ```
 
-**Set** a new value to a CSS global variable:
+Output  :
 ```javascript
-/* The following assigments to '--myVariable' behave equally, and are all valid */
-cssVar.myVariable = 'newValue';
-cssVar['myVariable'] = 'newValue';
-cssVar['--myVariable'] = 'newValue';
+00:00:00.00 : SubBeat 1 of Beat 1 of bar 1
+00:00:00.25 : SubBeat 2 of Beat 1 of bar 1
+00:00:00.50 : SubBeat 1 of Beat 2 of bar 1
+00:00:00.75 : SubBeat 2 of Beat 2 of bar 1
+00:00:01.00 : SubBeat 1 of Beat 1 of bar 2
+00:00:01.25 : SubBeat 2 of Beat 1 of bar 2
+00:00:01.50 : SubBeat 1 of Beat 2 of bar 2
+00:00:01.75 : SubBeat 2 of Beat 2 of bar 2
+00:00:02.00 : SubBeat 1 of Beat 1 of bar 3
+...
 ```
-
-**Get** the value of a CSS global variable:
-```javascript
-/* The following value retrievals for '--myVariable' behave equally, and are all valid */
-console.log( cssVar.myVariable );
-console.log( cssVar['myVariable'] );
-console.log( cssVar['--myVariable'] );
-```
-
-**Enumeration** of all declared CSS global variables, through iteration:
-```javascript
-for( let v in cssVar ){
-    console.log( v , '=', cssVar[v] );
-}
-```
-
-
-# Variable Name Normalization
-`Normalize functions` (implemented by [@SebastianDuval](https://github.com/SebastianDuval) ) allow you to perform automatic transformations of the variable names, to make them more suitable for the javascript syntax, or to simply addapt them to your coding style and personal preferences.
-
-In the following example a CSS variable declared using hyphens (`--my-css-variable`), can be accessed in Javascript using the widelly used camelCase style (`myCssVariable`), thanks to the `camelToHyphens` normalize function (and the native `autoprefixer`):
-
-CSS:
-```html
-<style>
-   :root{
-        --my-css-variable: 'red';
-    }
-</style>
-```
-Javascript: 
-```javascript
-let camelToHyphens = function(name){
-    return name.replace(/[A-Z]/g, m => "-" + m.toLowerCase() );
-}
-let cssVar = new CSSGlobalVariables( { normalize:camelToHyphens });
-
-cssVar.myCssVariable = 'blue';
-```
-
-
-# Automatic DOM Change Tracking
-
-The library uses a DOM Mutation Observer to detect new inclusion in the document. Thanks to this observer, new CSS variables are available automatically when new styles are attached to the document.  
-
-
-# CORS Restrictions
-CSSGlovalVariables will face limitations when trying to extract the CSS definitions of a remote stylesheet (except for same-origin urls). Restrictions applied by the browser, based in the Cross Origin Policy will block any access attempt.
-
-In such a scenario, a warning will be printed in the console, and the affected style element will be flagged and ignored by the library.
-
-To prevent this restriction, add the `crossorigin` attribute to the `<link>` element:
-
-```html
-<link rel="stylesheet" crossorigin="anonymous" href="https://www.a-remote-server/styles.css">
-```
-If the server is configured to allow CORS (through the  **Access-Control-Allow-Origin** directive) the CORS restrictions should disapear.

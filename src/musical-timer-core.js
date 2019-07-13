@@ -70,7 +70,7 @@
         let signatureNominator      = 4;		// first value of a time signature ( eg. 3/4 = 3 )
         let signatureDenominator    = 4;		// second value of a time signature ( eg. 3/4 = 4 )
         let beatSubdivisionMode		= SUBDIVISION_BINARY;
-        let beatResolutionFactor    = 2;        // The resolution factor is used to
+        let beatResolutionFactor    = 0;        // The resolution factor is used to
                                                 // calculate the time beat subdivision
                                                 
         // Position Counters 
