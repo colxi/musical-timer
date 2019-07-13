@@ -1,6 +1,6 @@
-# musical-timer 
+# Javascript Musical Timers 
 
-Generate configurable `Musical Timers`, that can be running at the requested **tempo** (BPM) frequency, with the desired **beat subdivision resolution**, and aware of to the provided **time signature** stucture. The internal clock will execute a callback in each cycle, providing information about the current, **BAR, BEAT and SUB-BEAT** (as well as other state properties).
+Generate configurable `Musical Timers` that can be running at the requested **tempo** (BPM) frequency, with the desired **beat subdivision resolution**, and aware of the provided **time signature** stucture. Properties as **BAR, BEAT and SUB-BEAT**... are being tracked and updated automatically by the internal clock.
 
 Main Features :
 - Cross enviroment : Browser & Node compatible
@@ -11,7 +11,7 @@ Main Features :
 - Supported time subdivision Modes : Binary / Ternary 
 - Beat subdivision resolution up to 𝅘𝅥𝅱 ( sixty-fourth note, hemidemisemiquave, 1/16th of a beat)
 - Tracks clock lose of Sync 
-- Controls : Play / Pause / Resume / Stop (Reset)
+- Clock controls : Play / Pause / Resume / Stop (Reset)
 
 Example : 
 
@@ -269,3 +269,16 @@ Output  :
 00:00:02.00 : SubBeat 1 of Beat 1 of bar 3
 ...
 ```
+
+# To do...
+
+In the current release the timer can be used to handle simple scenarios, and to play elementary scores/rythmical patterns, but would be imposible to use it to play advanced and complex patterns. The following improvements should be performed in order to provide support for ot:
+
+- Set `current tick` manually
+- Allow a `swing` modifier
+- Allow `binary` & `ternary` modes to run simultaneously (to let polyphonic complex melodies to be played) 
+
+Other improvements in mind :
+
+- Set configurable `SyncThreeshold` property
+- Set `current tick` providing timestamp (or formated timestamp)

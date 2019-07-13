@@ -1,6 +1,6 @@
 {
   "name": "musical-timer",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Timers based in musical parameters (time signature, tempo and beat resolution)",
   "main": "./src/musical-timer-core.js",
   "directories": {
