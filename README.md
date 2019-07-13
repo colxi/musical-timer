@@ -96,7 +96,7 @@ var musicalTimerInstance = new MusicalTimer( tickHandler [, tempo] )
 
 The following reference, documents all the **methods & properties** available in a `MusicalTimer` instance :
 
-> ### _musicalTimerInstance_.**play()**
+> #### _musicalTimerInstance_.**play()**
 
 Starts (or resumes when paused) the timer.
 ```javascript
