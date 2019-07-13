@@ -29,10 +29,52 @@ myTimer.play();
 // -> myTickHandler will be executed every 500ms (120bpm)
 ```
 
-Demo: [See it in action](https://colxi.github.io/musical-timer/test/browser-test-import.html)
+Demo: [See it in action](https://colxi.info/musical-timer/test/browser-test-import.html)
 
 
-# Syntax
+# Installation
+You can choose between any of the following available distribution channels:
+
+- **GIT**: Clone the repository locally using git (or download the latest release [here](https://github.com/colxi/musical-timer/releases/latest))
+ ```bash
+ $ git clone https://github.com/colxi/musical-timer.git
+```
+
+- **NPM**: Install it using npm. 
+```bash
+$ npm install musical-timer -s
+```
+
+- **CDN**: Include the script in your HTML header (`window.MusicalTimer` will be created).
+```html
+<script src="https://colxi.info/musical-timer/src/main.js" type="module"></script>
+```
+
+# Import/Include
+You can import/include this library in Browser & Node enviroment:
+
+- **Node** : You can require the library (after installing it with `npm`) with :
+
+```javascript
+const MusicalTimer = require('musical-timer');
+```
+
+- **Browser (import)** : You can import the library with :
+
+```javascript
+import {MusicalTimer} from './path-to/musical.timer.js';
+```
+
+
+- **Browser (include)** : You can include in your HTML head. The Constructor will become available as `window.MusicalTimer`
+
+```html
+<script src="./path-to/musical-timer/src/main.js" type="module"></script>
+```
+
+
+
+# Constructor Syntax
 
 The `MusicalTimer()` Constructor creates a new `MusicalTimer Instance`. 
 
@@ -49,27 +91,12 @@ var musicalTimerInstance = new MusicalTimer( tickHandler [, tempo] )
 (Optional) Number representing the clock tempo. (Default: `60`)
 
 
-# Installation
-You can choose between any of the following available distribution channels:
 
-- **GIT**: Clone the repository locally using git (or download the latest release [here](https://github.com/colxi/musical-timer/releases/latest))
- ```bash
- $ git clone https://github.com/colxi/musical-timer.git
-```
+#  Methods & Properties
 
-- **NPM**: Install it using npm. 
- ```bash
-$ npm install musical-timer -s
-```
+The following reference, documents all the **methods & properties** available in a `MusicalTimer` instance :
 
-- **CDN**: Include the script in your HTML header (`window.MusicalTimer` will be created).
- ```html
-<script src="https://colxi.info/musical-timer/src/main.js" type="module"></script>
-```
-
-#  Properties & Methods
-
-> _musicalTimerInstance_.**play()**
+> ### _musicalTimerInstance_.**play()**
 
 Starts (or resumes when paused) the timer.
 ```javascript
