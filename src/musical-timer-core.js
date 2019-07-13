@@ -1,6 +1,38 @@
 (function(){
     'use strict';
 
+    /***************************************************************************** 
+     * 
+     * ENGINE CONSTANTS
+     * 
+     *****************************************************************************/ 
+
+    // Constants to define time Subtivision modes
+    const SUBDIVISION_BINARY    = 0;
+    const SUBDIVISION_TERNARY   = 1;
+
+    // The following hash table returns the ammount of subbeats
+    // a beat can contain according to the beatResolutionFactor
+    // and the beatSubdivisionMode (index 0=binary, index 1=ternary)
+    const BEAT_SUBDIVISION =[ 
+        [1,2,4,8,16],
+        [1,3,6,12,24]
+    ];
+    
+    // Definition of supported time signatures
+    const  ALLOWED_SIGNATURES = [
+        '2/4',  // Binary
+        '3/4',  // Binary
+        '4/4',  // Binary
+        '6/8',  // Ternary
+        '9/8',  // Ternary
+        '12/8'  // Ternary
+    ];
+
+    // Tempo Min and Max Values
+    const TEMPO_MIN				= 1;		// minimum bps value
+    const TEMPO_MAX				= 200;		// maximum bps value
+
     let _Timer;
     // if executed from Node, require the advanced-timer library
     if(typeof module !== 'undefined' && module.exports ) _Timer = require('advanced-timer');
@@ -8,13 +40,23 @@
     // If not available needs to be provided manually (using MusicalTimer.attachTimer() )
     else if( typeof Timer !== 'undefined' ) _Timer = Timer;
     
-    function MusicalTimer( CALLBACK ){
+
+    /***************************************************************************** 
+     * 
+     * CONSTRUCTOR
+     * 
+     *****************************************************************************/ 
+    function MusicalTimer( CALLBACK, TEMPO=60 ){
         // force use 'new'
-        if( !new.target ) return new MusicalTimer( CALLBACK );
+        if( !new.target ) return new MusicalTimer( ...arguments );
 
         // Validate provided Callback function
         if( typeof CALLBACK !== 'function' ) throw new Error('Expecting a function as first argument');
+        
+        // Validate Tempo value
+        if( typeof TEMPO !== 'number' || TEMPO<TEMPO_MIN || TEMPO>TEMPO_MAX ) throw new Error('Second argument must be a number (range '+TEMPO_MIN+'-'+TEMPO_MAX+')');
 
+        // bind the callback to the instance
         CALLBACK = CALLBACK.bind( this );
 
         /***************************************************************************** 
@@ -23,34 +65,8 @@
          * 
          *****************************************************************************/ 
 
-        // Constants to define time Subtivision modes
-        const SUBDIVISION_BINARY    = 0;
-        const SUBDIVISION_TERNARY   = 1;
-
-        // The following hash table returns the ammount of subbeats
-        // a beat can contain according to the beatResolutionFactor
-        // and the beatSubdivisionMode (index 0=binary, index 1=ternary)
-        const BEAT_SUBDIVISION =[ 
-            [1,2,4,8,16],
-            [1,3,6,12,24]
-        ];
-        
-        // Definition of supported time signatures
-        const  ALLOWED_SIGNATURES = [
-            '2/4',  // Binary
-            '3/4',  // Binary
-            '4/4',  // Binary
-            '6/8',  // Ternary
-            '9/8',  // Ternary
-            '12/8'  // Ternary
-        ];
-
-        // Tempo Min and Max Values
-        const TEMPO_MIN				= 10;		// minimum bps value
-        const TEMPO_MAX				= 200;		// maximum bps value
-
         // Internal Timer variables
-        let tempo 					= 60.0;		// timer tempo (bps)
+        let tempo 					= TEMPO;		// timer tempo (bps)
         let signatureNominator      = 4;		// first value of a time signature ( eg. 3/4 = 3 )
         let signatureDenominator    = 4;		// second value of a time signature ( eg. 3/4 = 4 )
         let beatSubdivisionMode		= SUBDIVISION_BINARY;
