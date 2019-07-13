@@ -97,8 +97,12 @@ myTimer.stop(); // timer stops and gets reseted
 
 > _musicalTimerInstance_.**bar**  ![](https://colxi.info/musical-timer/docs/lock.png)
 
+Returns an integer representing the current musical **bar**
 
-> _musicalTimerInstance_.**beats**  ![](https://colxi.info/musical-timer/docs/lock.png)
+> _musicalTimerInstance_.**beat**  ![read only](https://colxi.info/musical-timer/docs/lock.png)
+
+Returns an integer representing the current **bar beat**
+
 
 > _musicalTimerInstance_.**beatSubdivision**  ![](https://colxi.info/musical-timer/docs/lock.png)
 
