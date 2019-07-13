@@ -98,35 +98,35 @@ myTimer.stop(); // timer stops and gets reseted
 > _musicalTimerInstance_.**bar**  ![](https://colxi.info/musical-timer/docs/lock.png)
 
 
-> _musicalTimerInstance_.**beats** 
+> _musicalTimerInstance_.**beats**  ![](https://colxi.info/musical-timer/docs/lock.png)
 
-> _musicalTimerInstance_.**beatSubdivision** 
+> _musicalTimerInstance_.**beatSubdivision**  ![](https://colxi.info/musical-timer/docs/lock.png)
 
-> _musicalTimerInstance_.**beatsPerBar** 
+> _musicalTimerInstance_.**beatsPerBar**  ![](https://colxi.info/musical-timer/docs/lock.png)
 
-> _musicalTimerInstance_.**inSync** 
+> _musicalTimerInstance_.**inSync**  ![](https://colxi.info/musical-timer/docs/lock.png)
 
 > _musicalTimerInstance_.**resolutionFactor** 
 
 > _musicalTimerInstance_.**signature** 
 
-> _musicalTimerInstance_.**status** 
+> _musicalTimerInstance_.**status**  ![](https://colxi.info/musical-timer/docs/lock.png)
 
-> _musicalTimerInstance_.**statusCode** 
+> _musicalTimerInstance_.**statusCode**  ![](https://colxi.info/musical-timer/docs/lock.png)
 
-> _musicalTimerInstance_.**subBeat**
+> _musicalTimerInstance_.**subBeat**  ![](https://colxi.info/musical-timer/docs/lock.png)
 
 > _musicalTimerInstance_.**tempo** 
 
-> _musicalTimerInstance_.**tick** 
+> _musicalTimerInstance_.**tick**  ![](https://colxi.info/musical-timer/docs/lock.png)
 
-> _musicalTimerInstance_.**tickDeltatime** 
+> _musicalTimerInstance_.**tickDeltatime**  ![](https://colxi.info/musical-timer/docs/lock.png)
 
-> _musicalTimerInstance_.**tickInterval** 
+> _musicalTimerInstance_.**tickInterval**  ![](https://colxi.info/musical-timer/docs/lock.png)
 
-> _musicalTimerInstance_.**timestamp** 
+> _musicalTimerInstance_.**timestamp**  ![](https://colxi.info/musical-timer/docs/lock.png)
 
-> _musicalTimerInstance_.**timestampFormated** 
+> _musicalTimerInstance_.**timestampFormated**  ![](https://colxi.info/musical-timer/docs/lock.png)
 
 Holds the timer current tempo value (bpm). Only accepts positive numbers. Limited to 200bpm by default
 
