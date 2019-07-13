@@ -1,21 +1,19 @@
-![](https://img.shields.io/badge/Javascript-ES6-orange.svg)
-![](https://img.shields.io/badge/CSS-Custom_Properties-blue.svg)
-
 # musical-timer 
 
-Generate configurable Musical Timers, that can be adjusted to the requested tempo (BPM), running with the desired beat subdivision resolution, adjusted to the provided time signature stucture. The internal clock will trigger a callback call in each cycle, providing information about the current, BAR, BEAT and SUB-BEAT.
+Generate configurable `Musical Timers`, that can be running at the requested **tempo** (BPM) frequency, with the desired **beat subdivision resolution**, and aware of to the provided **time signature** stucture. The internal clock will execute a callback in each cycle, providing information about the current, **BAR, BEAT and SUB-BEAT** (as well as other state properties).
 
 Main Features :
+- Cross enviroment : Browser & Node compatible
+- Highly Performant
+- Third party dependencies free
 - Adjustable Tempo (up to 200 bpm)
 - Supported time signatures : 2/4 | 3/4 | 4/4 | 6/8 | 9/8 | 12/8
 - Supported time subdivision Modes : Binary / Ternary 
 - Beat subdivision resolution up to 𝅘𝅥𝅱 ( sixty-fourth note, hemidemisemiquave, 1/16th of a beat)
-- Tracks clock Sync 
+- Tracks clock lose of Sync 
 - Controls : Play / Pause / Resume / Stop (Reset)
-- Highly Performant
-- Third party dependencies free
 
-
+Example : 
 
 ```javascript
 import {MusicalTimer} from './path-to/musical-timer.js';
@@ -96,13 +94,15 @@ var musicalTimerInstance = new MusicalTimer( tickHandler [, tempo] )
 
 The following reference, documents all the **methods & properties** available in a `MusicalTimer` instance :
 
-> #### _musicalTimerInstance_.**play()**
+> _musicalTimerInstance_.**play()**
 
 Starts (or resumes when paused) the timer.
 ```javascript
 let myTimer = new MusicalTimer( ()=>{} )
 myTimer.play(); // clock starts ticking
 ```
+
+---
 
 > _musicalTimerInstance_.**pause()** 
 
@@ -113,6 +113,8 @@ myTimer.play();
 myTimer.pause(); // pause clock
 ```
 
+---
+
 > _musicalTimerInstance_.**stop()** 
 
 Stops the timer, and resets its initial values.
@@ -122,36 +124,50 @@ myTimer.play();
 myTimer.stop(); // timer stops and gets reseted
 ```
 
+---
+
 > _musicalTimerInstance_.**bar**  ![Read only](https://colxi.info/musical-timer/docs/lock.png)
 
 Read only. Returns an integer representing the current musical **bar**
+
+---
 
 > _musicalTimerInstance_.**beat**  ![Read only](https://colxi.info/musical-timer/docs/lock.png)
 
 Read only. Returns an integer representing the current **beat** in the bar.
 
+---
+
 > _musicalTimerInstance_.**beatSubdivision**  ![Read only](https://colxi.info/musical-timer/docs/lock.png)
 
 Read only. Returns an integer representing the **ammount of elements** a beat can contain considering the resolution factor.
+
+---
 
 > _musicalTimerInstance_.**beatsPerBar**  ![Read only](https://colxi.info/musical-timer/docs/lock.png)
 
 Read only. Returns an integer representing the **ammount of beats** each bar contain, according to the time signature.
 
+---
+
 > _musicalTimerInstance_.**inSync**  ![Read only](https://colxi.info/musical-timer/docs/lock.png)
 
 Read only. Returns an boolean representing the **clock sync status**. If the provided callback function is not performant, clock could run out of sync.
 
+---
+
 > _musicalTimerInstance_.**resolutionFactor** 
 
 Accepts an integer (range 0-4) to set the beat subdivision resolution ( Default=0 ). Resolution levels are :
-- 𝅘𝅥 0 : Each beat has 0 sub-beats - quarter note (crotchet) - 
-- 𝅘𝅥𝅮 1 : Each beat has 2 sub-beats - eighth note (quaver) -
-- 𝅘𝅥𝅯 2 : Each beat has 4 sub-beats - sixteenth note (semiquaver) -
-- 𝅘𝅥𝅰 3 : Each beat has 8 sub-beats - thirty-second note (demisemiquaver)
-- 𝅘𝅥𝅱 4 : Each beat has 8 sub-beats - sixty-fourth note	(hemidemisemiquaver) -
+- ( 𝅘𝅥 ) 0 : Each beat has 0 sub-beats - quarter note (crotchet) - 
+- ( 𝅘𝅥𝅮 ) 1 : Each beat has 2 sub-beats - eighth note (quaver) -
+- ( 𝅘𝅥𝅯 ) 2 : Each beat has 4 sub-beats - sixteenth note (semiquaver) -
+- ( 𝅘𝅥𝅰 ) 3 : Each beat has 8 sub-beats - thirty-second note (demisemiquaver)
+- ( 𝅘𝅥𝅱 ) 4 : Each beat has 8 sub-beats - sixty-fourth note	(hemidemisemiquaver) -
 
 Depending on the resolution level, each timer tick, will represent _a crotchet, a quaver, a semiquaver_...
+
+---
 
 > _musicalTimerInstance_.**signature** 
 
@@ -163,43 +179,59 @@ Accepts a string representing the time signature ( Default='4/4' ). Accepted tim
 - 9/8 (ternary - 𝅘𝅥 𝅘𝅥 𝅘𝅥 ) 
 - 12/8 (ternary - 𝅘𝅥 𝅘𝅥 𝅘𝅥 𝅘𝅥 )
 
+---
+
 > _musicalTimerInstance_.**status**  ![Read only](https://colxi.info/musical-timer/docs/lock.png)
 
 Read only. String representing the status of the timer : _'stopped' , 'running' , 'paused'_
+
+---
 
 > _musicalTimerInstance_.**statusCode**  ![Read only](https://colxi.info/musical-timer/docs/lock.png)
 
 Read only. Integer representations of the status of the timer : _0, 1, 2_
 
+---
+
 > _musicalTimerInstance_.**subBeat**  ![Read only](https://colxi.info/musical-timer/docs/lock.png)
 
 Read only. Returns an integer representing the current **subbeat** in the beat.
+
+---
 
 > _musicalTimerInstance_.**tempo** 
 
 Accepts a positive number ( range 1-200 ) representing the beats per minute (bpm) clock frequency. ( Default=60 )
 
+---
+
 > _musicalTimerInstance_.**tick**  ![Read only](https://colxi.info/musical-timer/docs/lock.png)
 
 Read only. Integer representing the clock's current tick.
+
+---
 
 > _musicalTimerInstance_.**tickDeltatime**  ![Read only](https://colxi.info/musical-timer/docs/lock.png)
 
 Read only. Integer representing the time in miliseconds since the last clock tick.
 
+---
+
 > _musicalTimerInstance_.**tickInterval**  ![Read only](https://colxi.info/musical-timer/docs/lock.png)
 
 Read only. Integer representing the theoretical time in miliseconds betwen ticks (considering the beat resolution and tempo).
+
+---
 
 > _musicalTimerInstance_.**timestamp**  ![Read only](https://colxi.info/musical-timer/docs/lock.png)
 
 Read only. Integer representing the time passed since timer was started, in miliseconds
 
+---
+
 > _musicalTimerInstance_.**timestampFormated**  ![Read only](https://colxi.info/musical-timer/docs/lock.png)
 
 Read only. String representing the time passed since timer was started, in the format hh:mm:ss:SS
-
-
 
 
 
