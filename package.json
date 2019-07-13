@@ -1,8 +1,8 @@
 {
   "name": "musical-timer",
-  "version": "1.0.0",
-  "description": "A Musical clock to handle beat events",
-  "main": "./src/node-main.js",
+  "version": "1.0.2",
+  "description": "Timers based in musical parameters (time signature, tempo and beat resolution)",
+  "main": "./src/musical-timer-core.js",
   "directories": {
     "test": "test"
   },
@@ -15,11 +15,17 @@
   },
   "repository": {
     "type": "git",
-    "url": "github.com/colxi/..."
+    "url": "github.com/colxi/musical-timer"
   },
   "keywords": [
-    "musical",
-    "timer"
+    "musical timer",
+    "beat scheduler",
+    "tempo timer",
+    "music tempo",
+    "metronome",
+    "metronome timer",
+    "bpm timer",
+    "music timer"
   ],
   "author": "colxi",
   "license": "MIT"
